@@ -1,0 +1,13 @@
+import FreeCAD as App
+import Part
+
+
+def make_pipe(outer_dia,inner_dia,pipe_length):
+    plate = Part.makeCylinder(outer_dia,pipe_length)
+    hole = Part.makeCylinder(inner_dia, pipe_length)
+    return plate.cut(hole)
+
+part = make_pipe(100, 50, 200)
+doc = App.newDocument("ParametricPipe")
+Part.show(part)
+doc.recompute()
