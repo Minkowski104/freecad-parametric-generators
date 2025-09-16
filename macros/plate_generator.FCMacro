@@ -1,0 +1,14 @@
+import FreeCAD as App
+import Part
+
+
+def make_plate(length, width, thickness, hole_dia):
+    plate = Part.makeBox(length, width, thickness)
+    hole = Part.makeCylinder(hole_dia/2, thickness)
+    hole.translate(App.Vector(length/2, width/2, 0))
+    return plate.cut(hole)
+
+part = make_plate(120, 60, 8, 15)
+doc = App.newDocument("ParametricPartDynamic")
+Part.show(part)
+doc.recompute()
